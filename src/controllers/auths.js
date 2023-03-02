@@ -10,23 +10,25 @@ const Auth = {
     },
     POST: (req, res) => {
       try {
-        const users = readFile("users.json");
-        const { username, email, password } = req.body;
-        const foundEmail = users.find((el) => el.email === email);
-        if (foundEmail) return res.json({ status: 400, message: "This email already exist!" });
-        const user = {
-          id: users[users.length - 1]?.id ? users[users.length - 1]?.id + 1 : 1,
-          username,
-          email,
-          password: jwt.sign(password, key)
-        };
-        users.push(user);
-        writeFile("users.json", users);
-        delete user.password
-        return res.json({
-          status: 200,
-          message: "Succes registered!"
-        });
+        console.log(req.body);
+        console.log(req.files);
+        // const users = readFile("users.json");
+        // const { username, email, password } = req.body;
+        // const foundEmail = users.find((el) => el.email === email);
+        // if (foundEmail) return res.json({ status: 400, message: "This email already exist!" });
+        // const user = {
+        //   id: users[users.length - 1]?.id ? users[users.length - 1]?.id + 1 : 1,
+        //   username,
+        //   email,
+        //   password: jwt.sign(password, key)
+        // };
+        // users.push(user);
+        // writeFile("users.json", users);
+        // delete user.password
+        // return res.json({
+        //   status: 200,
+        //   message: "Succes registered!"
+        // });
       } catch (error) {
         console.log(error);
       }

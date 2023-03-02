@@ -1,24 +1,30 @@
-const { readFile, writeFile } = require("../utils/index.js");
+const jwt = require("jsonwebtoken")
+const { readFile } = require("../utils")
 const key = process.env.PRIVATE__KEY
 
-const TOKENV = (req, res, next) => {
+module.exports = async function (req, res, next) {
   try {
     const users = readFile("users.json");
-    const { token } = req.headers;
+    if (req.headers.token) {
+      let userInfo = await jwt.verify(req.headers.token, key);
+      const foundUser = users.find((el) => el.id === userInfo.id && el.username === userInfo.username && el.email === userInfo.email);
+      if (foundUser) {
+        delete foundUser.password
+        req.user = foundUser
+        return next();
+      }
 
-    const { id, username, email } = jwt.verify(token.token, key);
-    const foundUser = users.find((el) => el.id === id && el.username === username && el.email === email);
-    if (foundUser) {
-      return res.json({ "status": 200, message: "user active" });
+      return res.end({
+        status: 404,
+        message: "user not found"
+      })
     } else {
-      res.json({ "status": 404, message: "user not found" });
+      return res.send({
+        status: 404,
+        message: 'user not login'
+      })
     }
-
-    return next();
-
   } catch (error) {
-    console.log(error);
+    res.json(error)
   }
 }
-
-module.exports = TOKENV;

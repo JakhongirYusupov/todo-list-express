@@ -1,22 +1,6 @@
 const email = document.querySelector("#exampleInputEmail1");
 const password = document.querySelector("#exampleInputPassword1");
 
-; (async function () {
-  let token = JSON.parse(window.localStorage.getItem("todo_token"));
-  if (token) {
-    let res = await fetch("http://localhost:4040/token-verify", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        token: token
-      }
-    });
-    let data = await res.json();
-    if (data.status === 200) return window.location = "/";
-    return
-  }
-}())
-
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const res = await fetch("http://localhost:4040/login", {

@@ -1,38 +1,21 @@
 const fullName = document.querySelector("#exampename");
 const email = document.querySelector("#exampleInputEmail1");
 const password = document.querySelector("#exampleInputPassword1");
-
-// ; (async function () {
-//   let token = JSON.parse(window.localStorage.getItem("todo_token"));
-//   if (token) {
-//     let res = await fetch("http://localhost:4040/register", {
-//       method: "POST",
-//       head
-//       body: JSON.stringify({ token })
-//     });
-//     let data = await res.json();
-//     console.log(data);
-//     // if (data.status === 200) return window.location = "/";
-//     // return
-//   }
-// }())
+const input = document.querySelector("#exampleCheck1");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  console.log({
-    username: fullName.value,
-    email: email.value,
-    password: password.value
-  });
+  const formdata = new FormData();
+  formdata.append("username", fullName.value)
+  formdata.append("email", email.value)
+  formdata.append("password", password.value)
+  formdata.append("image", input.files[0])
+
   const res = await fetch("http://localhost:4040/register", {
     method: "POST",
-    body: JSON.stringify({
-      username: fullName.value,
-      email: email.value,
-      password: password.value
-    }),
+    body: formdata,
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "multipart/form-data"
     }
 
   })
