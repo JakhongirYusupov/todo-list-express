@@ -1,1 +1,26 @@
-[]
+[
+    {
+        "id": 2,
+        "todo": "huareghae;lkgeargaegeargea",
+        "checked": false,
+        "userId": 1
+    },
+    {
+        "id": 3,
+        "todo": "huareghae;lkgeargaegeargea",
+        "checked": false,
+        "userId": 1
+    },
+    {
+        "id": 4,
+        "todo": "ahu;eatgtea",
+        "checked": false,
+        "userId": 1
+    },
+    {
+        "id": 5,
+        "todo": "h;ihregt",
+        "checked": false,
+        "userId": 2
+    }
+]

@@ -35,6 +35,8 @@ const Course = {
         data
       })
     }
+
+    else return res.json("select type")
   },
   POST: (req, res) => {
     try {
@@ -42,7 +44,7 @@ const Course = {
       const { todo } = req.body;
       const { id } = req.user;
 
-      if (todo.length && typeof todo === "string") {
+      if (todo?.length && typeof todo === "string") {
         const userCourse = {
           id: courses[courses.length - 1]?.id + 1 || 1,
           todo,

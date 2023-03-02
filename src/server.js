@@ -12,14 +12,18 @@ const app = express();
 app.use(express.json());
 app.use(upload());
 
+
+
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "client")));
 app.use(express.static(path.join(__dirname, "client", "home")));
 
-
 app.use(authController);
 app.use(courseController);
+
+
+
 
 
 app.listen(PORT, () => console.log("Server is running http://localhost:" + PORT));

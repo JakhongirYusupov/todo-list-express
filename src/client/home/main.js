@@ -70,7 +70,7 @@ const pushTodos = (todos) => {
 };
 
 ; (async function () {
-  getCourse("all")
+  getCourse("all");
 }());
 
 form.addEventListener("submit", async () => {
@@ -111,19 +111,20 @@ complated.addEventListener("click", async () => {
 async function getCourse(type) {
   let token = JSON.parse(window.localStorage.getItem("todo_token"));
   try {
-    let todos = await fetch("http://localhost:4040/courses", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        type,
-        token
+    if (token) {
+      let todos = await fetch("http://localhost:4040/courses", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          type,
+          token
+        }
+      })
+      let courses = await todos.json();
+      if (courses.status === 200) {
+        return pushTodos(courses.data);
       }
-    })
-    let courses = await todos.json();
-    if (courses.status === 200) {
-      return pushTodos(courses.data);
     }
-    else return alert(courses.message);
   } catch (error) {
     console.log(error);
   }

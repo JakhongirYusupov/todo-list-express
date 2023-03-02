@@ -7,6 +7,7 @@ route.get("/register", Auth.REGISTER.GET);
 route.get("/login", Auth.LOGIN.GET);
 
 route.post("/register", Auth.REGISTER.POST);
+route.post("/register/upload", Auth.REGISTERIMAGE);
 route.post("/login", Auth.LOGIN.POST);
 
 
